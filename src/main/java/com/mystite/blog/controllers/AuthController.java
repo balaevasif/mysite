@@ -14,12 +14,12 @@ public class AuthController {
     @Autowired
     private UserRepository userRepository;
 
-    @GetMapping("/signIn")
+    @GetMapping("/personalAccount/signIn")
     public String signIn(){
         return "signIn";
     }
 
-    @GetMapping("/signUp")
+    @GetMapping("/personalAccount/signUp")
     public String signUp(){
         return "signUp";
     }
@@ -28,6 +28,6 @@ public class AuthController {
     public String register(@RequestParam String username, @RequestParam String password){
         User user = new User(username, password);
         userRepository.save(user);
-        return "redirect:/signIn";
+        return "redirect:/personalAccount/signIn";
     }
 }
