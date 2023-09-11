@@ -13,7 +13,7 @@ public class Post {
     private String text;
     private int storyPrice;
     private int feedPrice;
-    private Date published = new Date();
+    private Date published;
     private int views;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "userId")
@@ -25,13 +25,12 @@ public class Post {
     public Post() {
     }
 
-    public Post(String text, int storyPrice, int feedPrice, Date published, byte[] image, User user) {
+    public Post(String text, int storyPrice, int feedPrice, Date published, byte[] image) {
         this.text = text;
         this.storyPrice = storyPrice;
         this.feedPrice = feedPrice;
         this.published = published;
         this.image = image;
-        this.user = user;
     }
 
     public Long getId() {
