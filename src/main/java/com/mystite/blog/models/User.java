@@ -24,7 +24,7 @@ public class User {
 
     private Date birthday;
 
-    @OneToMany(mappedBy="userId", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy="user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Post> posts = new ArrayList<>();;
 
 

@@ -2,6 +2,7 @@ package com.mystite.blog.controllers;
 
 import com.mystite.blog.models.User;
 import com.mystite.blog.repositories.UserRepository;
+import com.mystite.blog.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -23,6 +24,9 @@ public class AuthController {
     private UserRepository userRepository;
     @Autowired
     private BCryptPasswordEncoder passwordEncoder;
+
+    @Autowired
+    private UserService userService;
 
     @GetMapping("/personalAccount/signIn")
     public String signIn(){
@@ -64,9 +68,7 @@ public class AuthController {
                 return "authentication/signUp";
             }
             else {
-                String hashedPassword = passwordEncoder.encode(password);
-                User user = new User(username, hashedPassword);
-                userRepository.save(user);
+                userService.registerUser(username, password);
                 logger.info("User with username: {} saved successfully", username);
                 return "redirect:/personalAccount/signIn";
             }

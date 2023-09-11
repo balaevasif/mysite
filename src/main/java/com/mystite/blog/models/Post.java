@@ -25,12 +25,13 @@ public class Post {
     public Post() {
     }
 
-    public Post(String text, int storyPrice, int feedPrice, Date published, byte[] image) {
+    public Post(String text, int storyPrice, int feedPrice, Date published, byte[] image, User user) {
         this.text = text;
         this.storyPrice = storyPrice;
         this.feedPrice = feedPrice;
         this.published = published;
         this.image = image;
+        this.user = user;
     }
 
     public Long getId() {
