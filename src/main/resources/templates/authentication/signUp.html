@@ -5,12 +5,16 @@
     <title>Title</title>
 </head>
 <body>
+
+<span th:if="${message}"  th:text="${message}"></span>
+
 <div>
-    <form action="/personalAccount/signIn" method="post">
+    <form action="/personalAccount/signUp" method="post">
         <input type="text" name="username">
-        <input type="text" name="password">
+        <input type="password" name="password">
+        <input type="password" name="password_2">
         <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
-        <button type="submit">авторизоваться</button>
+        <button type="submit">Зарегестрироваться</button>
     </form>
 </div>
 </body>

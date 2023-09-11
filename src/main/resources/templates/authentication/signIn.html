@@ -6,11 +6,11 @@
 </head>
 <body>
 <div>
-    <form action="/personalAccount/signUp" method="post">
+    <form action="/personalAccount/signIn" method="post">
         <input type="text" name="username">
-        <input type="text" name="password">
+        <input type="password" name="password">
         <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
-        <button type="submit">зарегестрироваться</button>
+        <button type="submit">Авторизоваться</button>
     </form>
 </div>
 </body>
