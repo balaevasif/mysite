@@ -13,10 +13,10 @@ public class Post {
     private String text;
     private int storyPrice;
     private int feedPrice;
-    private Date published;
+    private Date published = new Date();
     private int views;
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "userId")
     private User user;
     @Lob
     @Column(name = "image", columnDefinition = "LONGBLOB")

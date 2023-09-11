@@ -25,13 +25,13 @@ public class User {
     private Date birthday;
 
     @OneToMany(mappedBy ="userId", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Post> posts = new ArrayList<>();;
+    private List<Post> posts = new ArrayList<>();
 
     public Long getId() {
         return userId;
     }
 
-    public void setId(Long user_id) {
+    public void setId(Long userId) {
         this.userId = userId;
     }
 
