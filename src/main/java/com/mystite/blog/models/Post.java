@@ -9,7 +9,7 @@ import java.util.Date;
 public class Post {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long post_id;
+    private Long postId;
     private String text;
     private int storyPrice;
     private int feedPrice;
@@ -25,20 +25,21 @@ public class Post {
     public Post() {
     }
 
-    public Post(String text, int storyPrice, int feedPrice, Date published, byte[] image) {
+    public Post(String text, int storyPrice, int feedPrice, Date published, byte[] image, User user) {
         this.text = text;
         this.storyPrice = storyPrice;
         this.feedPrice = feedPrice;
         this.published = published;
         this.image = image;
+        this.user = user;
     }
 
     public Long getId() {
-        return post_id;
+        return postId;
     }
 
-    public void setId(Long post_id) {
-        this.post_id = post_id;
+    public void setId(Long postId) {
+        this.postId = postId;
     }
 
     public String getText() {

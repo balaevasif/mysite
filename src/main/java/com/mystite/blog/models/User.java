@@ -2,7 +2,9 @@ package com.mystite.blog.models;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 
 @Entity
@@ -11,25 +13,26 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long user_id;
+    private Long userId;
 
     private String username;
     private String password;
 
     private String mail;
 
-    private Date registerDate;
+    private final Date registerDate = new Date();
 
     private Date birthday;
 
-
+    @OneToMany(mappedBy ="userId", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Post> posts = new ArrayList<>();;
 
     public Long getId() {
-        return user_id;
+        return userId;
     }
 
     public void setId(Long user_id) {
-        this.user_id = user_id;
+        this.userId = userId;
     }
 
     public String getUsername() {
