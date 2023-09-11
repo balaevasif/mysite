@@ -24,7 +24,7 @@ public class AuthController {
         return "signUp";
     }
 
-    @PostMapping("/register")
+    @PostMapping("/personalAccount/signUp")
     public String register(@RequestParam String username, @RequestParam String password){
         User user = new User(username, password);
         userRepository.save(user);
