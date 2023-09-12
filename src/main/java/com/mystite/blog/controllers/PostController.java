@@ -25,6 +25,8 @@ public class PostController {
     private PostService postService;
     @Autowired
     private PostRepository postRepository;
+    @Autowired
+    private UserRepository userRepository;
 
     @GetMapping("/posts")
     public String posts(Model model){
@@ -34,7 +36,10 @@ public class PostController {
 
     @GetMapping("/post/{postId}")
     public String details(@PathVariable(value = "postId") long postId, Model model){
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        User user = userRepository.findByUsername(auth.getName());
         model.addAttribute("post", postService.showDetails(postId));
+        model.addAttribute("user", user.getUsername());
         return "post/post_details";
     }
 
