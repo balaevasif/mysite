@@ -8,30 +8,28 @@
 <body>
 
 
-<div th:name="navigation">
-    <table border="1">
-        <tr>
-            <td><a href="/posts">Главная</a></td>
-            <td><a href="/hot">Топ</a></td>
-            <td><a href="/personalAccount">Личный кабинет</a></td>
-            <td><a href="/about">О нас</a></td>
-        </tr>
-        <tr>
-            <td colspan="4">
-                <h1 th:inline="text">Hello <span th:remove="tag" sec:authentication="name">thymeleaf</span>!</h1>
-            </td>
-        </tr>
-    </table>
-</div>
+    <div th:name="navigation">
+        <table border="1">
+            <tr>
+                <td><a href="/posts">Главная</a></td>
+                <td><a href="/hot">Топ</a></td>
+                <td><a href="/personalAccount">Личный кабинет</a></td>
+                <td><a href="/about">О нас</a></td>
+            </tr>
+            <tr>
+                <td colspan="4">
+                    <h1 th:inline="text">Hello <span th:remove="tag" sec:authentication="name">thymeleaf</span>!</h1>
+                </td>
+            </tr>
+        </table>
+    </div>
 
 
-
-
-
-
-    <form action="/logout" method="post">
-        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
-        <input type="submit" value="Sign Out"/>
-    </form>
+    <div sec:authorize="isAuthenticated()">
+        <form action="/logout" method="post">
+            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+            <input type="submit" value="Sign Out"/>
+        </form>
+    </div>
 </body>
 </html>
