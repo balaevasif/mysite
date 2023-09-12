@@ -8,16 +8,24 @@
 
   <div>
 
-    <div th:each="el : ${posts}" class="alert alert-info mt-2">
-      <a th:href="'/post/' + ${el.postId}">
-        <h3 th:text="${el.text}"></h3>
-        <p th:text="${el.storyPrice}"></p>
-        <p th:text="${el.feedPrice}"></p>
-        <p th:text="${el.published}"></p>
-        <p th:text="${el.views}"></p>
-        <img th:src="@{|data:image/png;base64,${el.imageBase64}|}" alt="Изображение">
-      </a>
-    </div>
+    <table>
+      <tr th:each="row : ${#numbers.sequence(0, posts.size() - 1, 3)}">
+        <th th:each="i : ${#numbers.sequence(row, row + 2)}" th:if="${i < posts.size()}">
+          <div th:with="el=${posts[i]}">
+            <a th:href="'/post/' + ${el.postId}">
+              <div style="border: 1px solid black; padding: 10px;">
+                <h3 th:text="${el.text}"></h3>
+                <img th:src="@{|data:image/png;base64,${el.imageBase64}|}" alt="Изображение" style="width: 200px; height: 200px;">
+                <p th:text="${el.storyPrice}"></p>
+                <p th:text="${el.feedPrice}"></p>
+                <p th:text="${el.published}"></p>
+                <p th:text="${el.views}"></p>
+              </div>
+            </a>
+          </div>
+        </th>
+      </tr>
+    </table>
 
   </div>
 
