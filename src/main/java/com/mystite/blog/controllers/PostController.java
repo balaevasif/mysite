@@ -32,16 +32,23 @@ public class PostController {
         return "post/posts";
     }
 
-
     @GetMapping("/post/{postId}")
     public String details(@PathVariable(value = "postId") long postId, Model model){
         model.addAttribute("post", postService.showDetails(postId));
         return "post/post_details";
     }
 
+    @GetMapping("/post/{postId}/edit")
+    public String edit(@PathVariable(value = "postId") long postId, Model model){
+        model.addAttribute("post", postService.showDetails(postId));
+        return "post/post_edit";
+    }
 
-
-
+    @PostMapping("/post/{postId}/edit")
+    public String update(@PathVariable(value = "postId") long postId, @RequestParam String text, @RequestParam int storyPrice, @RequestParam int feedPrice){
+        postService.postEdit(text, storyPrice, feedPrice, postId);
+        return "redirect:/posts";
+    }
 
     @GetMapping("/posts/add")
     public String Add(){

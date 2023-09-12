@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div>
+    <div th:each="el : ${post}">
+        <form method="post">
+            <input type="text" th:value="${el.text}" name="text"><br>
+            <input type="number" th:value="${el.storyPrice}" name="storyPrice"><br>
+            <input type="number" th:value="${el.feedPrice}" name="feedPrice"><br>
+            <img th:src="@{|data:image/png;base64,${el.imageBase64}|}" alt="Изображение">
+            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+            <button type="submit">Обновить</button>
+        </form>
+
+    </div>
+</div>
+
+
+</body>
+</html>

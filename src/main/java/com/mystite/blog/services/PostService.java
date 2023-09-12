@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
-import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -40,7 +39,21 @@ public class PostService {
     public ArrayList<Post> showDetails(long postId){
         Optional<Post> post = postRepository.findById(postId);
         ArrayList<Post> result = new ArrayList<>();
-        post.ifPresent(result::add);
+        post.ifPresent(p -> {
+            String imageBase64 = Base64.getEncoder().encodeToString(p.getImage());
+            p.setImageBase64(imageBase64);
+            result.add(p);
+            p.setViews(p.getViews()+1);
+            postRepository.save(p);
+        });
         return result;
+    }
+
+    public void postEdit(String text, int storyPrice, int feedPrice, long postId){
+        Post post = postRepository.findById(postId).orElseThrow();
+        post.setText(text);
+        post.setStoryPrice(storyPrice);
+        post.setFeedPrice(feedPrice);
+        postRepository.save(post);
     }
 }

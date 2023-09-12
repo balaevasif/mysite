@@ -8,14 +8,14 @@
 
   <div>
     <h1>Блог сайта</h1>
-    <div th:each="el : ${posts}">
+    <div th:each="el : ${posts}" class="alert alert-info mt-2">
       <h3 th:text="${el.text}"></h3>
       <p th:text="${el.storyPrice}"></p>
       <p th:text="${el.feedPrice}"></p>
       <p th:text="${el.published}"></p>
       <p th:text="${el.views}"></p>
       <img th:src="@{|data:image/png;base64,${el.imageBase64}|}" alt="Изображение">
-      <a th:href="'/post/' + ${el.postId}" class="btn btn-warning">Детальнее</a>
+      <a th:href="'/post/' + ${el.postId}">Детальнее</a>
 
     </div>
   </div>
