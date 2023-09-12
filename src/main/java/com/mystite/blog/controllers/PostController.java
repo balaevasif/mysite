@@ -39,7 +39,7 @@ public class PostController {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = userRepository.findByUsername(auth.getName());
         model.addAttribute("post", postService.showDetails(postId));
-        model.addAttribute("user", user.getUsername());
+        model.addAttribute("user", user);
         return "post/post_details";
     }
 

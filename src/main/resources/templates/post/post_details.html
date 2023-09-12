@@ -14,12 +14,7 @@
     <p th:text="${el.published}"></p>
     <p th:text="${el.views}"></p>
     <img th:src="@{|data:image/png;base64,${el.imageBase64}|}" alt="Изображение">
-    <a th:href="'/post/' + ${el.postId} + '/edit'">Изменить</a>
-
-    <p th:text="${user}"></p>
-    <p th:text="${el.user}"></p>
-
-    <a th:href="'/post/' + ${el.postId} + '/edit'">Изменить</a>
+    <a th:href="'/post/' + ${el.postId} + '/edit'" th:if="${user == el.user}">Изменить</a>
   </div>
 </div>
 

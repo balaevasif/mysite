@@ -28,7 +28,7 @@ public class WebSecurityConfig {
                         .requestMatchers("/", "/index",
                                 "/personalAccount", "/personalAccount/signIn",
                                 "/personalAccount/signUp", "/posts",
-                                "/post").permitAll()
+                                "/post/**").permitAll()
                         .anyRequest().authenticated()
                 )
                 .formLogin((form) -> form
