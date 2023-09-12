@@ -1,10 +1,24 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
+
+  <div>
+    <h1>Блог сайта</h1>
+    <div th:each="el : ${posts}">
+      <h3 th:text="${el.text}"></h3>
+      <p th:text="${el.storyPrice}"></p>
+      <p th:text="${el.feedPrice}"></p>
+      <p th:text="${el.published}"></p>
+      <p th:text="${el.views}"></p>
+      <img th:src="@{|data:image/png;base64,${el.imageBase64}|}" alt="Изображение">
+      <a th:href="'/post/' + ${el.postId}" class="btn btn-warning">Детальнее</a>
+
+    </div>
+  </div>
 
     <a href="/posts/add">добавить пост</a>
 

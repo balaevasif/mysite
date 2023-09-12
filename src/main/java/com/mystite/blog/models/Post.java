@@ -22,23 +22,30 @@ public class Post {
     @Column(name = "image", columnDefinition = "LONGBLOB")
     private byte[] image;
 
+    @Transient
+    private String imageBase64;
+
+    public String getImageBase64() {
+        return imageBase64;
+    }
+
     public Post() {
     }
 
-    public Post(String text, int storyPrice, int feedPrice, Date published, byte[] image, User user) {
+    public Post(String text, int storyPrice, int feedPrice, byte[] image, User user) {
         this.text = text;
         this.storyPrice = storyPrice;
         this.feedPrice = feedPrice;
-        this.published = published;
+        this.published = new Date();
         this.image = image;
         this.user = user;
     }
 
-    public Long getId() {
+    public Long postId() {
         return postId;
     }
 
-    public void setId(Long postId) {
+    public void postId(Long postId) {
         this.postId = postId;
     }
 
@@ -88,5 +95,9 @@ public class Post {
 
     public void setImage(byte[] image) {
         this.image = image;
+    }
+
+    public void setImageBase64(String imageBase64) {
+        this.imageBase64 = imageBase64;
     }
 }
