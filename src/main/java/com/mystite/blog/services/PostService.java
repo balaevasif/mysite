@@ -56,4 +56,6 @@ public class PostService {
         post.setFeedPrice(feedPrice);
         postRepository.save(post);
     }
+
+
 }

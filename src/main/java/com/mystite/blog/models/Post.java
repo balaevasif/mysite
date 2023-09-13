@@ -2,7 +2,9 @@ package com.mystite.blog.models;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "Posts")
@@ -15,23 +17,13 @@ public class Post {
     private int feedPrice;
     private Date published;
     private int views;
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "userId")
-    private User user;
     @Lob
     @Column(name = "image", columnDefinition = "LONGBLOB")
     private byte[] image;
-
     @Transient
     private String imageBase64;
-
-    public String getImageBase64() {
-        return imageBase64;
-    }
-
     public Post() {
     }
-
     public Post(String text, int storyPrice, int feedPrice, byte[] image, User user) {
         this.text = text;
         this.storyPrice = storyPrice;
@@ -39,6 +31,17 @@ public class Post {
         this.published = new Date();
         this.image = image;
         this.user = user;
+    }
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "userId")
+    private User user;
+
+    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Like> likes = new ArrayList<>();
+
+    public String getImageBase64() {
+        return imageBase64;
     }
 
     public Long postId() {

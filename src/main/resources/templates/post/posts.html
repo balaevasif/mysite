@@ -18,11 +18,10 @@
             <h3 th:text="${el.text}"></h3>
             <img th:src="@{|data:image/png;base64,${el.imageBase64}|}" alt="Изображение" style="width: 220px; height: 300px;">
             <div>
-
-              <span th:text="${el.storyPrice}" class="post"></span>
-              <span th:text="${el.feedPrice}"></span>
-              <span th:text="${el.published}"></span>
-              <span th:text="${el.views}"></span>
+              <p th:text="${el.storyPrice}" class="post"></p>
+              <p th:text="${el.feedPrice}"></p>
+              <p th:text="${el.published}"></p>
+              <p th:text="${el.views}"></p>
             </div>
           </div>
         </a>

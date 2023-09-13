@@ -37,7 +37,7 @@ public class UserService {
     public void likePost(long postId){
         Post post = postRepository.findById(postId).orElseThrow();
         User user = getAuthUser();
-        Like like = likeRepository.FindByPostAndUser(post, user);
+        Like like = likeRepository.findByPostAndUser(post, user);
         if (like != null){likeRepository.delete(like);}
         else {
             like = new Like(post, user);
