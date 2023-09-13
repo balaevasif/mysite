@@ -20,11 +20,11 @@ public class PostService {
     @Autowired
     private UserRepository userRepository;
 
-    public Post addPost(String postText, int storyPrice, int feedPrice, MultipartFile image) throws IOException {
+    public void addPost(String postText, int storyPrice, int feedPrice, MultipartFile image) throws IOException {
         byte[] imageData = image.getBytes();
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = userRepository.findByUsername(auth.getName());
-        return postRepository.save(new Post(postText, storyPrice, feedPrice, imageData, user));
+        postRepository.save(new Post(postText, storyPrice, feedPrice, imageData, user));
     }
 
     public List<Post> showAll(){

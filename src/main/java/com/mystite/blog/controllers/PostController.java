@@ -1,13 +1,8 @@
 package com.mystite.blog.controllers;
 
-import com.mystite.blog.models.Post;
-import com.mystite.blog.models.User;
-import com.mystite.blog.repositories.PostRepository;
-import com.mystite.blog.repositories.UserRepository;
 import com.mystite.blog.services.PostService;
+import com.mystite.blog.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,9 +19,7 @@ public class PostController {
     @Autowired
     private PostService postService;
     @Autowired
-    private PostRepository postRepository;
-    @Autowired
-    private UserRepository userRepository;
+    private UserService userService;
 
     @GetMapping("/posts")
     public String posts(Model model){
@@ -36,11 +29,15 @@ public class PostController {
 
     @GetMapping("/post/{postId}")
     public String details(@PathVariable(value = "postId") long postId, Model model){
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        User user = userRepository.findByUsername(auth.getName());
         model.addAttribute("post", postService.showDetails(postId));
-        model.addAttribute("user", user);
+        model.addAttribute("user", userService.getAuthUser());
         return "post/post_details";
+    }
+
+    @PostMapping("/post/{postId}")
+    public String likePost(@PathVariable(value = "postId") long postId){
+        userService.likePost(postId);
+        return "redirect:/posts";
     }
 
     @GetMapping("/post/{postId}/edit")

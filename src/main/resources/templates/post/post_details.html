@@ -15,7 +15,15 @@
     <p th:text="${el.views}"></p>
     <img th:src="@{|data:image/png;base64,${el.imageBase64}|}" alt="Изображение">
     <a th:href="'/post/' + ${el.postId} + '/edit'" th:if="${user == el.user}">Изменить</a>
+    <form method="post">
+      <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+      <button type="submit">
+        лайкнуть
+      </button>
+    </form>
   </div>
+
+
 </div>
 
 
