@@ -2,6 +2,7 @@ package com.mystite.blog.services;
 
 import com.mystite.blog.models.Post;
 import com.mystite.blog.models.User;
+import com.mystite.blog.repositories.LikeRepository;
 import com.mystite.blog.repositories.PostRepository;
 import com.mystite.blog.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,8 @@ public class PostService {
     private PostRepository postRepository;
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private LikeRepository likeRepository;
 
     public void addPost(String postText, int storyPrice, int feedPrice, MultipartFile image) throws IOException {
         byte[] imageData = image.getBytes();
@@ -34,6 +37,15 @@ public class PostService {
             post.setImageBase64(imageBase64);
         }
         return posts;
+    }
+
+    public Map<Post, Long> getPostLikesCount(List<Post> allPosts) {
+        Map<Post, Long> postLikesCount = new HashMap<>();
+        for (Post post : allPosts) {
+            Long count = likeRepository.countByPost(post);
+            postLikesCount.put(post, count);
+        }
+        return postLikesCount;
     }
 
     public ArrayList<Post> showDetails(long postId){

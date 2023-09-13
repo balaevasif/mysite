@@ -9,31 +9,34 @@
 
 <div class="centered-container">
 
-<table>
-  <tr th:each="row : ${#numbers.sequence(0, posts.size() - 1, 5)}">
-    <th th:each="i : ${#numbers.sequence(row, row + 4)}" th:if="${i < posts.size()}" style="padding-right: 40px; padding-bottom: 50px;">
-      <div th:with="el=${posts[i]}">
-        <a th:href="'/post/' + ${el.postId}">
-          <div style="border: 1px solid black; padding: 10px;">
-            <h3 th:text="${el.text}"></h3>
-            <img th:src="@{|data:image/png;base64,${el.imageBase64}|}" alt="Изображение" style="width: 220px; height: 300px;">
-            <div>
-              <p th:text="${el.storyPrice}" class="post"></p>
-              <p th:text="${el.feedPrice}"></p>
-              <p th:text="${el.published}"></p>
-              <p th:text="${el.views}"></p>
+  <table>
+    <tr th:each="row : ${#numbers.sequence(0, posts.size() - 1, 5)}">
+      <th th:each="i : ${#numbers.sequence(row, row + 4)}" th:if="${i < posts.size()}" style="padding-right: 40px; padding-bottom: 50px;">
+        <div th:with="el=${posts[i]}">
+          <a th:href="'/post/' + ${el.postId}">
+            <div style="border: 1px solid black; padding: 10px;">
+              <h3 th:text="${el.text}"></h3>
+              <img th:src="@{|data:image/png;base64,${el.imageBase64}|}" alt="Изображение" style="width: 220px; height: 300px;">
+              <div>
+                <span>asd</span>
+                <p th:text="${el.storyPrice}" class="post"></p>
+                <p th:text="${el.feedPrice}"></p>
+                <p th:text="${el.published}"></p>
+                <p th:text="${el.views}"></p>
+                <p th:text="${postLikesCount.get(el)} + ' лайков'"></p>
+              </div>
             </div>
-          </div>
-        </a>
-      </div>
-    </th>
-  </tr>
-</table>
+          </a>
+        </div>
+      </th>
+    </tr>
+  </table>
 
 </div>
 
 
+<div sec:authorize="isAuthenticated()">
   <a href="/posts/add">добавить пост</a>
-
+</div>
 </body>
 </html>
