@@ -25,7 +25,7 @@ public class User {
     private Date birthday;
 
     @OneToMany(mappedBy="user", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Post> posts = new ArrayList<>();
+    private final List<Post> posts = new ArrayList<>();
 
     public Long getId() {
         return userId;

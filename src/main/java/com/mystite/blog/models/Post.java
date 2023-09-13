@@ -38,7 +38,7 @@ public class Post {
     private User user;
 
     @OneToMany(mappedBy = "post", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Like> likes = new ArrayList<>();
+    private final List<Like> likes = new ArrayList<>();
 
     public String getImageBase64() {
         return imageBase64;

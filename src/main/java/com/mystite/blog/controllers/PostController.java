@@ -2,7 +2,6 @@ package com.mystite.blog.controllers;
 
 import com.mystite.blog.models.Post;
 
-import com.mystite.blog.models.User;
 import com.mystite.blog.repositories.PostRepository;
 
 import com.mystite.blog.services.PostService;
@@ -25,10 +24,6 @@ public class PostController {
     private PostService postService;
     @Autowired
     private UserService userService;
-//    @Autowired
-//    private SubscribeRepository subscribeRepository;
-    @Autowired
-    private PostRepository postRepository;
 
     @GetMapping("/posts")
     public String posts(Model model){
@@ -74,12 +69,5 @@ public class PostController {
         return "redirect:/posts";
     }
 
-//    @PostMapping("/subscribe")
-//    public String subscribe(@PathVariable(value = "postId") long postId){
-//        User user = subscribeRepository.findUserByPost(postRepository.findById(postId).orElseThrow());
-//        User user2 = userService.getAuthUser();
-//        Subscribe subscribe = new Subscribe(user, user2);
-//        subscribeRepository.save(subscribe);
-//        return "redirect:/posts";
-//    }
+
 }

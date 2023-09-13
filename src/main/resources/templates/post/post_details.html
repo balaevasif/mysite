@@ -25,17 +25,15 @@
       </form>
     </div>
 
-    <div sec:authorize="isAuthenticated()">
+    <!--<div sec:authorize="isAuthenticated()">
       <form action="/subscribe" method="post">
         <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
         <button type="submit">
           подписаться
         </button>
       </form>
-    </div>
+    </div>-->
   </div>
-
-
 </div>
 
 
