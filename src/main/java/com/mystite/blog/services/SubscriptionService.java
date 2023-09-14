@@ -40,9 +40,10 @@ public class SubscriptionService {
     }
 
     public boolean isSubscribed(long postId){
-        Post post = postRepository.findById(postId);
+        Post post = postRepository.findById(postId).orElseTrhow();
         User user = post.getUser();
         User subscriber = userService.getAuthUser();
+        Subscription subscription = subscriptionRepository.findBySubscriberAndUser(user, subscriber);
         
 
 
