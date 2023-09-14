@@ -25,7 +25,9 @@ public class SubscriptionService {
     private static final Logger logger = LoggerFactory.getLogger(AuthController.class);
 
     public void subscribe(long postId){
-        User user = subscriptionRepository.findUserByPostId(postId);
+        Post post = postRepository.findById(postId).orElseThrow();
+        User user = post.getUser();
+        //User user = subscriptionRepository.findUserByPostId(postId);
         User subscriber = userService.getAuthUser();
         Subscription subscription = subscriptionRepository.findBySubscriberAndUser(subscriber, user);
         if (subscription != null){
