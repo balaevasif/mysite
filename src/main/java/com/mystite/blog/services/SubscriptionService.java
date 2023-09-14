@@ -30,7 +30,6 @@ public class SubscriptionService {
         Subscription subscription = subscriptionRepository.findBySubscriberAndUser(subscriber, user);
         if (subscription != null){
             subscriptionRepository.delete(subscription);
-            logger.info("not null", subscription);
         }
         else {
             subscription = new Subscription(subscriber, user);
