@@ -10,7 +10,7 @@ import org.springframework.data.repository.query.Param;
 
 @Repository
 public interface SubscriptionRepository extends JpaRepository<Subscription, Long> {
-    Long countBySubscriber(User user);
+    Long countSubscribersByUser(User user);
     @Query("SELECT p.user FROM Post p WHERE p.postId = :postId")
     User findUserByPostId(long postId);
     Subscription findBySubscriberAndUser(User subscriber, User user);

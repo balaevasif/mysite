@@ -4,6 +4,7 @@ import com.mystite.blog.models.Post;
 import com.mystite.blog.models.User;
 import com.mystite.blog.repositories.LikeRepository;
 import com.mystite.blog.repositories.PostRepository;
+import com.mystite.blog.repositories.SubscriptionRepository;
 import com.mystite.blog.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -22,6 +23,8 @@ public class PostService {
     private UserRepository userRepository;
     @Autowired
     private LikeRepository likeRepository;
+    @Autowired
+    private SubscriptionRepository subscriptionRepository;
 
     public void addPost(String postText, int storyPrice, int feedPrice, MultipartFile image) throws IOException {
         byte[] imageData = image.getBytes();
@@ -49,11 +52,12 @@ public class PostService {
     }
 
     public Map<Post, Long> getSubscribersCount(List<Post> allPosts){
+        Map<Post, Long> userSubsCount = new HashMap<>();
         for (Post post : allPosts) {
-            Long count = likeRepository.countByPost(post);
-
+            Long count = subscriptionRepository.countSubscribersByUser(post.getUser());
+            userSubsCount.put(post, count);
         }
-        return null;//
+        return userSubsCount;
     };
 
     public ArrayList<Post> showDetails(long postId){

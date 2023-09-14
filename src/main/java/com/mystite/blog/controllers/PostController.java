@@ -7,10 +7,7 @@ import com.mystite.blog.models.User;
 import com.mystite.blog.repositories.PostRepository;
 
 import com.mystite.blog.repositories.SubscriptionRepository;
-import com.mystite.blog.services.LikeService;
-import com.mystite.blog.services.PostService;
-import com.mystite.blog.services.SubscriptionService;
-import com.mystite.blog.services.UserService;
+import com.mystite.blog.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,6 +22,7 @@ import java.util.*;
 
 @Controller
 public class PostController {
+
     @Autowired
     private PostService postService;
     @Autowired
@@ -39,6 +37,7 @@ public class PostController {
     public String posts(Model model){
         model.addAttribute("posts", postService.showAll());
         model.addAttribute("postLikesCount",  postService.getPostLikesCount(postService.showAll()));
+        model.addAttribute("userSubsCount", postService.getSubscribersCount(postService.showAll()));
         return "post/posts";
     }
 
