@@ -48,6 +48,14 @@ public class PostService {
         return postLikesCount;
     }
 
+    public Map<Post, Long> getSubscribersCount(List<Post> allPosts){
+        for (Post post : allPosts) {
+            Long count = likeRepository.countByPost(post);
+
+        }
+        return null;//
+    };
+
     public ArrayList<Post> showDetails(long postId){
         Optional<Post> post = postRepository.findById(postId);
         ArrayList<Post> result = new ArrayList<>();

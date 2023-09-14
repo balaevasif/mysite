@@ -2,9 +2,14 @@ package com.mystite.blog.controllers;
 
 import com.mystite.blog.models.Post;
 
+import com.mystite.blog.models.Subscription;
+import com.mystite.blog.models.User;
 import com.mystite.blog.repositories.PostRepository;
 
+import com.mystite.blog.repositories.SubscriptionRepository;
+import com.mystite.blog.services.LikeService;
 import com.mystite.blog.services.PostService;
+import com.mystite.blog.services.SubscriptionService;
 import com.mystite.blog.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,6 +29,11 @@ public class PostController {
     private PostService postService;
     @Autowired
     private UserService userService;
+    @Autowired
+    private SubscriptionService subscriptionService;
+
+    @Autowired
+    private LikeService likeService;
 
     @GetMapping("/posts")
     public String posts(Model model){
@@ -39,9 +49,15 @@ public class PostController {
         return "post/post_details";
     }
 
+    @PostMapping("/post/{postId}/subscribe")
+    public String subscribe(@PathVariable(value = "postId") long postId, Model model){
+        subscriptionService.subscribe(postId);
+        return "redirect:/posts";
+    }
+
     @PostMapping("/post/{postId}")
     public String likePost(@PathVariable(value = "postId") long postId){
-        userService.likePost(postId);
+        likeService.likePost(postId);
         return "redirect:/posts";
     }
 

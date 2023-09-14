@@ -34,15 +34,6 @@ public class UserService {
         return userRepository.findByUsername(auth.getName());
     }
 
-    public void likePost(long postId){
-        Post post = postRepository.findById(postId).orElseThrow();
-        User user = getAuthUser();
-        Like like = likeRepository.findByPostAndUser(post, user);
-        if (like != null){likeRepository.delete(like);}
-        else {
-            like = new Like(post, user);
-            likeRepository.save(like);
-        }
-    }
+
 
 }

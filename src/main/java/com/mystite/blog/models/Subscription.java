@@ -13,21 +13,21 @@ public class Subscription {
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "subscriber_id")
+    @JoinColumn(name = "subUserId")
     private User subscriber;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "subscribed_to_id")
-    private User subscribedTo;
+    @JoinColumn(name = "user")
+    private User user;
 
     private Date dateSubscribed;
 
     public Subscription() {
     }
 
-    public Subscription(User subscriber, User subscribedTo) {
+    public Subscription(User subscriber, User user) {
         this.subscriber = subscriber;
-        this.subscribedTo = subscribedTo;
+        this.user = user;
         this.dateSubscribed = new Date();
     }
 

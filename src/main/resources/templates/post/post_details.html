@@ -14,26 +14,37 @@
     <p th:text="${el.published}"></p>
     <p th:text="${el.views}"></p>
     <img th:src="@{|data:image/png;base64,${el.imageBase64}|}" alt="Изображение">
-    <a th:href="'/post/' + ${el.postId} + '/edit'" th:if="${user == el.user}">Изменить</a>
 
     <div sec:authorize="isAuthenticated()">
-      <form method="post">
-        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
-        <button type="submit">
-          лайкнуть
-        </button>
-      </form>
+
     </div>
 
-    <!--<div sec:authorize="isAuthenticated()">
-      <form action="/subscribe" method="post">
-        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
-        <button type="submit">
-          подписаться
-        </button>
-      </form>
-    </div>-->
+
+    <div sec:authorize="isAuthenticated()">
+      <div th:if="${user == el.user}">
+        <a th:href="'/post/' + ${el.postId} + '/edit'">Изменить</a>
+      </div>
+      <div th:if="${user != el.user}">
+        <div>
+          <form th:action="@{'/post/' + ${el.postId} + '/subscribe'}" method="post">
+            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+            <button type="submit">
+              подписаться
+            </button>
+          </form>
+        </div>
+        <div>
+          <form method="post">
+            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+            <button type="submit">
+              лайкнуть
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
   </div>
+
 </div>
 
 
