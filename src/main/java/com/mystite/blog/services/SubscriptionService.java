@@ -39,5 +39,11 @@ public class SubscriptionService {
         }
     }
 
+    public boolean isSubscribed(long postId){
+        Post post = postRepository.findById(postId);
+        User user = post.getUser();
+        User subscriber = userService.getAuthUser();
+        
+
 
 }
