@@ -27,10 +27,8 @@ public class PostController {
 
     @GetMapping("/posts")
     public String posts(Model model){
-        List<Post> allPosts = postService.showAll();
-        Map<Post, Long> postLikesCount = postService.getPostLikesCount(allPosts);
-        model.addAttribute("posts", allPosts);
-        model.addAttribute("postLikesCount", postLikesCount);
+        model.addAttribute("posts", postService.showAll());
+        model.addAttribute("postLikesCount",  postService.getPostLikesCount(postService.showAll()));
         return "post/posts";
     }
 
