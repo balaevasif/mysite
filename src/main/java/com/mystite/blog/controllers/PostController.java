@@ -32,6 +32,8 @@ public class PostController {
 
     @Autowired
     private LikeService likeService;
+    @Autowired
+    private CommentService commentService;
 
     @GetMapping("/posts")
     public String posts(Model model){
@@ -56,6 +58,12 @@ public class PostController {
         subscriptionService.subscribe(postId);
         return "redirect:/posts";
     }
+    @PostMapping("/post/{postId}/addComment")
+    public String addComment(@PathVariable(value = "postId") long postId, @RequestParam String comment){
+        commentService.addComment(postId, comment);
+        return "redirect:/posts";
+    }
+
 
     @PostMapping("/post/{postId}")
     public String likePost(@PathVariable(value = "postId") long postId){

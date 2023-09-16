@@ -4,32 +4,32 @@
 <head>
   <meta charset="UTF-8">
   <title>Title</title>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="posts.css">
 </head>
-<body class="bg-light">
+<body>
 
-<div class="container mt-5 centered-container">
+<div class="post-container">
 
-  <table>
+  <table class="post-table">
     <tr th:each="row : ${#numbers.sequence(0, posts.size() - 1, 5)}">
-      <th th:each="i : ${#numbers.sequence(row, row + 4)}" th:if="${i < posts.size()}" class="pr-5 pb-5">
-        <div th:with="el=${posts[i]}">
-          <a th:href="'/post/' + ${el.postId}" class="text-dark text-decoration-none">
-            <div class="post-card">
+      <th class="post-cell" th:each="i : ${#numbers.sequence(row, row + 4)}" th:if="${i < posts.size()}">
+        <div class="post-item" th:with="el=${posts[i]}">
+          <a th:href="'/post/' + ${el.postId}" class="post-link">
+            <div class="post-content">
               <div class="post-info">
-                <span th:text="${usernames.get(el)}" class="postLikeAndSubsCount"></span>
-                <img th:src="@{/pictures/heartPosts.png}" width="25" height="25">
-                <span th:text="${postLikesCount.get(el)}" class="postLikeAndSubsCount"></span>
-                <img th:src="@{/pictures/subscribers.png}" width="25" height="25">
-                <span th:text="${userSubsCount.get(el)}" class="postLikeAndSubsCount"></span>
+                <span th:text="${usernames.get(el)}" class="post-username"></span>
+                <img th:src="@{/pictures/heartPosts.png}" class="post-icon">
+                <span th:text="${postLikesCount.get(el)}" class="post-like-count"></span>
+                <img th:src="@{/pictures/subscribers.png}" class="post-icon">
+                <span th:text="${userSubsCount.get(el)}" class="post-subscriber-count"></span>
               </div>
-              <img th:src="@{|data:image/png;base64,${el.imageBase64}|}" alt="Изображение" class="post-image">
-              <div class="left-aligned-content">
-                <p th:text="${el.published}"></p>
-                <p th:text="${el.text}" class="post"></p>
-                <p><span>Цена в истории:</span><span th:text="${el.storyPrice}" class="post"></span></p>
-                <p><span>Цена в ленте:</span><span th:text="${el.feedPrice}" class="post"></span></p>
-                <p><span>Посмотров: </span> <span th:text="${el.views}"></span></p>
+              <img th:src="@{|data:image/png;base64,${el.imageBase64}|}" class="post-image">
+              <div class="post-details">
+                <p class="post-date" th:text="${el.published}"></p>
+                <p class="post-text" th:text="${el.text}"></p>
+                <p><span class="post-label">Цена в истории:</span><span th:text="${el.storyPrice}"></span></p>
+                <p><span class="post-label">Цена в ленте:</span><span th:text="${el.feedPrice}"></span></p>
+                <p><span class="post-label">Посмотров: </span> <span th:text="${el.views}"></span></p>
               </div>
             </div>
           </a>
@@ -40,12 +40,9 @@
 
 </div>
 
-<div sec:authorize="isAuthenticated()" class="text-center mt-4">
-  <a href="/posts/add" class="btn btn-primary">добавить пост</a>
+<div sec:authorize="isAuthenticated()" class="add-post-btn-container">
+  <a href="/posts/add" class="add-post-btn">добавить пост</a>
 </div>
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 </body>
 </html>
