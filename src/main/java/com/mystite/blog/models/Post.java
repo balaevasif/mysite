@@ -2,6 +2,7 @@ package com.mystite.blog.models;
 
 import jakarta.persistence.*;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -15,7 +16,7 @@ public class Post {
     private String text;
     private int storyPrice;
     private int feedPrice;
-    private Date published;
+    private LocalDate published;
     private int views;
     @Lob
     @Column(name = "image", columnDefinition = "LONGBLOB")
@@ -28,7 +29,7 @@ public class Post {
         this.text = text;
         this.storyPrice = storyPrice;
         this.feedPrice = feedPrice;
-        this.published = new Date();
+        this.published = LocalDate.now();
         this.image = image;
         this.user = user;
     }
@@ -76,11 +77,11 @@ public class Post {
         this.feedPrice = feedPrice;
     }
 
-    public Date getPublished() {
+    public LocalDate getPublished() {
         return published;
     }
 
-    public void setPublished(Date published) {
+    public void setPublished(LocalDate published) {
         this.published = published;
     }
 

@@ -38,6 +38,7 @@ public class PostController {
         model.addAttribute("posts", postService.showAll());
         model.addAttribute("postLikesCount",  postService.getPostLikesCount(postService.showAll()));
         model.addAttribute("userSubsCount", postService.getSubscribersCount(postService.showAll()));
+        model.addAttribute("usernames", postService.getUsernamesByPost(postService.showAll()));
         return "post/posts";
     }
 
@@ -45,6 +46,8 @@ public class PostController {
     public String details(@PathVariable(value = "postId") long postId, Model model){
         model.addAttribute("post", postService.showDetails(postId));
         model.addAttribute("user", userService.getAuthUser());
+        model.addAttribute("isSubscriber", subscriptionService.isSubscriber(postId));
+        model.addAttribute("isLiked", likeService.isLiked(postId));
         return "post/post_details";
     }
 

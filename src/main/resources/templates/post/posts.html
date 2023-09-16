@@ -1,30 +1,35 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
-<head>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" th:href="@{css/style.css}">
-  <title>Title</title>
-</head>
-<body>
 
-<div class="centered-container">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body class="bg-light">
+
+<div class="container mt-5 centered-container">
 
   <table>
     <tr th:each="row : ${#numbers.sequence(0, posts.size() - 1, 5)}">
-      <th th:each="i : ${#numbers.sequence(row, row + 4)}" th:if="${i < posts.size()}" style="padding-right: 40px; padding-bottom: 50px;">
+      <th th:each="i : ${#numbers.sequence(row, row + 4)}" th:if="${i < posts.size()}" class="pr-5 pb-5">
         <div th:with="el=${posts[i]}">
-          <a th:href="'/post/' + ${el.postId}">
-            <div style="border: 1px solid black; padding: 10px;">
-              <h3 th:text="${el.text}"></h3>
-              <img th:src="@{|data:image/png;base64,${el.imageBase64}|}" alt="Изображение" style="width: 220px; height: 300px;">
-              <div>
-                <span>asd</span>
-                <p th:text="${el.storyPrice}" class="post"></p>
-                <p th:text="${el.feedPrice}"></p>
+          <a th:href="'/post/' + ${el.postId}" class="text-dark text-decoration-none">
+            <div class="post-card">
+              <div class="post-info">
+                <span th:text="${usernames.get(el)}" class="postLikeAndSubsCount"></span>
+                <img th:src="@{/pictures/heartPosts.png}" width="25" height="25">
+                <span th:text="${postLikesCount.get(el)}" class="postLikeAndSubsCount"></span>
+                <img th:src="@{/pictures/subscribers.png}" width="25" height="25">
+                <span th:text="${userSubsCount.get(el)}" class="postLikeAndSubsCount"></span>
+              </div>
+              <img th:src="@{|data:image/png;base64,${el.imageBase64}|}" alt="Изображение" class="post-image">
+              <div class="left-aligned-content">
                 <p th:text="${el.published}"></p>
-                <p th:text="${el.views}"></p>
-                <p th:text="${postLikesCount.get(el)} + ' лайков'"></p>
-                <p th:text="${userSubsCount.get(el)} + ' подписчиков'"></p>
+                <p th:text="${el.text}" class="post"></p>
+                <p><span>Цена в истории:</span><span th:text="${el.storyPrice}" class="post"></span></p>
+                <p><span>Цена в ленте:</span><span th:text="${el.feedPrice}" class="post"></span></p>
+                <p><span>Посмотров: </span> <span th:text="${el.views}"></span></p>
               </div>
             </div>
           </a>
@@ -35,9 +40,12 @@
 
 </div>
 
-
-<div sec:authorize="isAuthenticated()">
-  <a href="/posts/add">добавить пост</a>
+<div sec:authorize="isAuthenticated()" class="text-center mt-4">
+  <a href="/posts/add" class="btn btn-primary">добавить пост</a>
 </div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
 </body>
 </html>

@@ -32,4 +32,11 @@ public class LikeService {
             likeRepository.save(like);
         }
     }
+
+    public boolean isLiked(long postId){
+        Post post = postRepository.findById(postId).orElseThrow();
+        User auth = userService.getAuthUser();
+        Like like = likeRepository.findByPostAndUser(post, auth);
+        return like != null;
+    }
 }

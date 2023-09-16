@@ -9,6 +9,7 @@ import com.mystite.blog.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -59,6 +60,16 @@ public class PostService {
         }
         return userSubsCount;
     };
+
+    public Map<Post, String> getUsernamesByPost(List<Post> allPost){
+        Map<Post, String> postUserMap = new HashMap<>();
+        for (Post posts: allPost){
+            User user = posts.getUser();
+            String username = user.getUsername();
+            postUserMap.put(posts, username);
+        }
+        return postUserMap;
+    }
 
     public ArrayList<Post> showDetails(long postId){
         Optional<Post> post = postRepository.findById(postId);

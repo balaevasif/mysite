@@ -1,6 +1,7 @@
 package com.mystite.blog.services;
 
 import com.mystite.blog.controllers.AuthController;
+import com.mystite.blog.models.Post;
 import com.mystite.blog.models.Subscription;
 import com.mystite.blog.models.User;
 import com.mystite.blog.repositories.PostRepository;
@@ -35,6 +36,14 @@ public class SubscriptionService {
             subscription = new Subscription(subscriber, user);
             subscriptionRepository.save(subscription);
         }
+    }
+
+    public boolean isSubscriber(long postId){
+        Post post = postRepository.findById(postId).orElseThrow();
+        User user = post.getUser();
+        User subscriber = userService.getAuthUser();
+        Subscription subscription = subscriptionRepository.findBySubscriberAndUser(subscriber, user);
+        return subscription == null;
     }
 
 
