@@ -1,9 +1,11 @@
 package com.mystite.blog.controllers;
 
+import com.mystite.blog.models.Comment;
 import com.mystite.blog.models.Post;
 
 import com.mystite.blog.models.Subscription;
 import com.mystite.blog.models.User;
+import com.mystite.blog.repositories.CommentRepository;
 import com.mystite.blog.repositories.PostRepository;
 
 import com.mystite.blog.repositories.SubscriptionRepository;
@@ -34,6 +36,10 @@ public class PostController {
     private LikeService likeService;
     @Autowired
     private CommentService commentService;
+    @Autowired
+    private CommentRepository commentRepository;
+    @Autowired
+    private PostRepository postRepository;
 
     @GetMapping("/posts")
     public String posts(Model model){
@@ -50,6 +56,7 @@ public class PostController {
         model.addAttribute("user", userService.getAuthUser());
         model.addAttribute("isSubscriber", subscriptionService.isSubscriber(postId));
         model.addAttribute("isLiked", likeService.isLiked(postId));
+        //model.addAttribute("comments", commentService.showComments(postId));
         return "post/post_details";
     }
 

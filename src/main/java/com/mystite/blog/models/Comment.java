@@ -12,39 +12,42 @@ public class Comment {
     private Long commentId;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "postId")
-    private Post postId;
+    @JoinColumn(name = "post_id")
+    private Post post;
 
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "userId")
-    private User userId;
+    @JoinColumn(name = "user_id")
+    private User user;
 
     private String comment;
 
     private LocalDate published;
 
-    public Comment(Post postId, User userId, String comment) {
-        this.postId = postId;
-        this.userId = userId;
+    public Comment(Post post, User user, String comment) {
+        this.post = post;
+        this.user = user;
         this.comment = comment;
         this.published = LocalDate.now();
     }
 
-
-    public Post getPostId() {
-        return postId;
+    public Comment() {
     }
 
-    public void setPostId(Post postId) {
-        this.postId = postId;
+
+    public Post getPost() {
+        return post;
     }
 
-    public User getUserId() {
-        return userId;
+    public void setPost(Post post) {
+        this.post = post;
     }
 
-    public void setUserId(User userId) {
-        this.userId = userId;
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public String getComment() {

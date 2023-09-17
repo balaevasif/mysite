@@ -27,6 +27,14 @@ public class CommentService {
         commentRepository.save(comment);
     }
 
+//    public List<Comment> showComments(long postId){
+//        Post post = postRepository.findById(postId).orElseThrow();
+//        List<Comment> comments = commentRepository.findByPost(post);
+//        return comments;
+//    }
+
+
+
 //    public List<Comment> comments(){
 //
 //    }
