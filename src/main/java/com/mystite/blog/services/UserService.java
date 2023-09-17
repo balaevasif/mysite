@@ -30,7 +30,7 @@ public class UserService {
 
     public void registerUser(String username, String password){
         String hashedPassword = passwordEncoder.encode(password);
-        userRepository.save(new User(username, hashedPassword, User.getDefaultImage()));
+        userRepository.save(new User(username, hashedPassword));
     }
     //Получить текущего авторизованного пользователя
     public User getAuthUser(){

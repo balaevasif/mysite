@@ -98,10 +98,10 @@ public class User {
         this.password = password;
     }
 
-    public User(String username, String password, byte[] image) {
+    public User(String username, String password) {
         this.username = username;
         this.password = password;
-        this.image = image;
+        this.image = getDefaultImage();
     }
     public User() {
     }
@@ -114,7 +114,7 @@ public class User {
     public static byte[] getDefaultImage() {
         try {
             // Загрузка стандартного изображения из ресурсов или файла
-            InputStream in = User.class.getResourceAsStream("/pictures/emptyHeart.png");
+            InputStream in = User.class.getResourceAsStream("/static/pictures/emptyHeart.png");
             return IOUtils.toByteArray(in); // IOUtils из библиотеки Apache Commons IO
         } catch (IOException e) {
             e.printStackTrace();
