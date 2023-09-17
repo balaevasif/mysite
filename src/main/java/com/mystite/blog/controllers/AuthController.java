@@ -12,7 +12,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
+import java.util.Base64;
 import java.util.Objects;
 
 @Controller
@@ -27,7 +30,6 @@ public class AuthController {
 
     @Autowired
     private UserService userService;
-
     @GetMapping("/personalAccount/signIn")
     public String signIn(){
         //logger.info("Method signIn was called");
@@ -74,4 +76,44 @@ public class AuthController {
             }
         }
     }
+
+
+    //17.09.2023
+
+    @GetMapping("/personalAccount")
+    public String personalAccount(Model model){
+        model.addAttribute("user", userService.getAuthUser());
+        return "authentication/personalAccount";
+    }
+
+    @PostMapping("/personalAccount")
+    public String personalAccountUp(@RequestParam(required = false) String mail, @RequestParam(name = "image", required = false) MultipartFile image) throws IOException {
+        if (mail != null && image != null) {
+            userService.updateInfo(mail, image);
+        } else if (mail != null) {
+            userService.updateInfo(mail);
+        } else if (image != null) {
+            userService.updateInfo(image);
+        }
+        return "redirect:/personalAccount";
+    }
+
+
+//    @PostMapping("/personalAccount")
+//    public String personalAccountUp(@RequestParam String mail) throws IOException {
+//        User user = userService.getAuthUser();
+//        user.setMail(mail);
+//        userRepository.save(user);
+//        return "redirect:/personalAccount";
+//    }
+//
+//    @PostMapping("/personalAccount")
+//    public String personalAccountUp(@RequestParam("image") MultipartFile image) throws IOException {
+//        User user = userService.getAuthUser();
+//        byte[] imageData = image.getBytes();
+//        user.setImage(imageData);
+//        userRepository.save(user);
+//        return "redirect:/personalAccount";
+//    }
+
 }

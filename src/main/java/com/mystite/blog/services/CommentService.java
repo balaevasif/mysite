@@ -8,6 +8,7 @@ import com.mystite.blog.repositories.PostRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Base64;
 import java.util.List;
 
 @Service
@@ -27,15 +28,14 @@ public class CommentService {
         commentRepository.save(comment);
     }
 
-//    public List<Comment> showComments(long postId){
-//        Post post = postRepository.findById(postId).orElseThrow();
-//        List<Comment> comments = commentRepository.findByPost(post);
-//        return comments;
-//    }
+    public List<Comment> showComments(long postId){
+        Post post = postRepository.findById(postId).orElseThrow();
+        List<Comment> comments = commentRepository.findByPost(post);
+        for (Comment comment: comments){
+            String imageBase64 = Base64.getEncoder().encodeToString(comment.getUser().getImage());
+            comment.getUser().setImageBase64(imageBase64);
+        }
+        return comments;
+    }
 
-
-
-//    public List<Comment> comments(){
-//
-//    }
 }

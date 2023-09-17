@@ -56,7 +56,7 @@ public class PostController {
         model.addAttribute("user", userService.getAuthUser());
         model.addAttribute("isSubscriber", subscriptionService.isSubscriber(postId));
         model.addAttribute("isLiked", likeService.isLiked(postId));
-        //model.addAttribute("comments", commentService.showComments(postId));
+        model.addAttribute("comments", commentService.showComments(postId));
         return "post/post_details";
     }
 

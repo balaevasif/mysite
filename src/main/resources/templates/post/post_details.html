@@ -65,17 +65,17 @@
               </div>
 
 
-              <div th:each="comm : ${comments}" class="comments">
-                <p th:text="${comm.comment}"></p>
-              </div>
+
             </div>
           </div>
         </div>
 
 
-
-
-
+        <div th:each="comm : ${comments}" class="comments">
+          <p th:text="${comm.comment}"></p>
+          <p th:text="${comm.user.username}"></p>
+          <img th:src="@{|data:image/png;base64,${comm.user.imageBase64}|}" alt="Изображее">
+        </div>
       </div>
     </div>
   </div>

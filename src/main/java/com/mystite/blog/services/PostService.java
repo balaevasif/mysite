@@ -31,6 +31,7 @@ public class PostService {
         byte[] imageData = image.getBytes();
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = userRepository.findByUsername(auth.getName());
+        //просто User user = userService.getAuthUser();
         postRepository.save(new Post(postText, storyPrice, feedPrice, imageData, user));
     }
 

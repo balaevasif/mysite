@@ -17,8 +17,5 @@ public class MainController {
     public String about(){
         return "about";
     }
-    @GetMapping("/personalAccount")
-    public String personalAccount(){
-        return "authentication/personalAccount";
-    }
+
 }
