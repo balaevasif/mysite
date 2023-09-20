@@ -38,4 +38,8 @@ public class CommentService {
         return comments;
     }
 
+    public void deleteComment(long commentId){
+        Comment comment = commentRepository.findById(commentId).orElseThrow();
+        commentRepository.delete(comment);
+    }
 }

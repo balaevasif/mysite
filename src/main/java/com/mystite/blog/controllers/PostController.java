@@ -71,6 +71,11 @@ public class PostController {
         return "redirect:/posts";
     }
 
+    @PostMapping("/deleteComment/{commentId}")
+    public String deleteComment(@PathVariable(value = "commentId") long commentId){
+        commentService.deleteComment(commentId);
+        return "redirect:/posts";
+    }
 
     @PostMapping("/post/{postId}")
     public String likePost(@PathVariable(value = "postId") long postId){

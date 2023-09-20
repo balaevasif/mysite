@@ -6,6 +6,9 @@
 </head>
 <body>
 
+
+<header th:insert="~{blocks/header :: header}"></header>
+
 <div>
     <div th:each="el : ${post}">
         <form method="post">

@@ -113,9 +113,8 @@ public class User {
 
     public static byte[] getDefaultImage() {
         try {
-            // Загрузка стандартного изображения из ресурсов или файла
             InputStream in = User.class.getResourceAsStream("/static/pictures/emptyHeart.png");
-            return IOUtils.toByteArray(in); // IOUtils из библиотеки Apache Commons IO
+            return IOUtils.toByteArray(in);
         } catch (IOException e) {
             e.printStackTrace();
             return new byte[0];
